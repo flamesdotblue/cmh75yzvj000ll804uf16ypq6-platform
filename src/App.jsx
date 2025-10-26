@@ -1,28 +1,40 @@
-import { useState } from 'react'
+import { useEffect } from 'react';
+import Hero from './components/Hero';
+import OverviewFeatures from './components/OverviewFeatures';
+import BenefitsTestimonials from './components/BenefitsTestimonials';
+import PricingCTAAndFooter from './components/PricingCTAAndFooter';
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    document.title = 'LabTasker — Laboratory Management System';
+    const setMeta = (name, content) => {
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    };
+
+    setMeta(
+      'description',
+      'LabTasker is a comprehensive SaaS Laboratory Management System that streamlines research operations, project management, experiments, equipment, inventory, compliance, and collaboration.'
+    );
+    setMeta(
+      'keywords',
+      'Lab management software, Laboratory information management, LIMS, research project management, lab inventory, lab equipment, compliance, SOPs, experiments, analytics, SaaS'
+    );
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen bg-slate-950 text-white scroll-smooth">
+      <Hero />
+      <OverviewFeatures />
+      <BenefitsTestimonials />
+      <PricingCTAAndFooter />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
